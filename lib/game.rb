@@ -72,7 +72,7 @@ def winner
     end
   end
 
-  def self.start
+  def self.go
       puts "Hi! Welcome to Tic-Tac-Toe!"
       puts "How many players? 0, 1 or 2?"
       player_count = gets.strip.to_i
