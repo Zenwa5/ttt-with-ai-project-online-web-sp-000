@@ -72,6 +72,69 @@ def winner
     end
   end
 
+  def self.start
+      puts "Hi! Welcome to Tic-Tac-Toe!"
+      puts "How many players? 0, 1 or 2?"
+      player_count = gets.strip.to_i
+
+      if player_count == 100
+        wargames
+        return
+      end
+
+      puts "Who should go first? Player 1 (press 1) or Player 2 (press 2)? The first player is \"X\"."
+      first_player = gets.strip.to_i
+
+      if player_count == 0
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+      elsif player_count == 1
+        if first_player == 1
+          player_1 = Players::Human.new("X")
+          player_2 = Players::Computer.new("O")
+        else
+          player_1 = Players::Computer.new("X")
+          player_2 = Players::Human.new("O")
+        end
+      else
+        player_1 = Players::Human.new("X")
+        player_2 = Players::Human.new("O")
+      end
+
+      Game.new(player_1, player_2).play
+      puts "Would you like to play again? Y/N?"
+      play_again = gets.strip
+
+      if play_again == "Y"
+        start
+      end
+    end
+
+    def self.wargames
+      x = []
+      o = []
+      c = []
+
+      100.times do
+        player_1 = Players::Computer.new("X")
+        player_2 = Players::Computer.new("O")
+
+        game = Game.new(player_1, player_2)
+        game.play
+
+        if game.winner == "X"
+          x << game
+        elsif game.winner == "O"
+          o << game
+        else
+          c << game
+        end
+      end
+
+      puts "X: #{x.count}"
+      puts "O: #{o.count}"
+      puts "C: #{c.count}"
+    end
 
 
 
